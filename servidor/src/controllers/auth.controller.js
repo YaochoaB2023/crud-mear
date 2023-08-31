@@ -83,3 +83,21 @@ export const profile = async (req, res) => {
         email: userFound.email
     });
 }
+
+export const verifyToken = async ( req, res ) => {
+    const { token } = req.cookies
+    if ( !token ) return res.status(401).json({message: 'No Autorizado'})
+
+    jwt.verify(token, TOKEN_SECRET, async (err, user) => {
+        if (err) return res.status(401).json({message: 'No Autorizado'})
+        
+        const userFound = await User.findById( user.id )
+        if (!userFound ) return res.status( 401 ).json( { message: "No Autorizado" } )
+
+        return res.json({
+            id: userFound.id,
+            username: userFound.username,
+            email: userFound.email
+        })
+    })
+}
