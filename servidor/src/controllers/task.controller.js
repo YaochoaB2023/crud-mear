@@ -14,18 +14,27 @@ export const getTask = async (req,res) => {
     res.status(200).json(task);
 }
 
-export const createTask = async (req,res) => {
+export const createTask = async ( req, res ) =>
+{
 
-    const { title, description, date } = req.body;
+    try
+    {
 
-    const newTask = new Task({
-        title,
-        description,
-        date,
-        user: req.user.id
-    });
-    const saveTask = await newTask.save(); 
-    res.status(200).json(saveTask);
+        const { title, description, date } = req.body
+
+        const newTask = new Task( {
+            title,
+            description,
+            date,
+            user: req.user.id
+        } )
+
+        const savedTask = await newTask.save()
+        res.status( 200 ).json( savedTask )
+    } catch ( error )
+    {
+        res.status( 500 ).json( { message: error.message } )
+    }
 
 }
 
