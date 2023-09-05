@@ -9,8 +9,7 @@ export const AuthContext = createContext()
 export const useAuth = () =>
 {
     const context = useContext( AuthContext )
-    if ( !context )
-    {
+    if ( !context ){
         throw new Error( 'useAuth must be used within an AuthProvider' )
     }
     return context
@@ -26,8 +25,7 @@ export const AuthProvider = ( { children } ) =>
 
 
 
-    const signup = async ( user ) =>
-    {
+    const signup = async ( user ) =>{
         try
         {
             const res = await registerRequest( user )
@@ -41,8 +39,7 @@ export const AuthProvider = ( { children } ) =>
         }
     }
 
-    const signin = async ( user ) =>
-    {
+    const signin = async ( user ) => {
         try
         {
             const res = await loginRequest( user )
@@ -61,8 +58,7 @@ export const AuthProvider = ( { children } ) =>
         }
     }
 
-    useEffect( () =>
-    {
+    useEffect( () => {
         if ( errors.length > 0 )
         {
             const timer = setTimeout( () =>
@@ -73,8 +69,7 @@ export const AuthProvider = ( { children } ) =>
         }
     }, [ errors ] )
 
-    useEffect( () =>
-    {
+    useEffect( () =>{
         async function checkLogin ()
         {
             const cookies = Cookies.get()
