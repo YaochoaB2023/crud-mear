@@ -13,3 +13,4 @@ router.post('/logout', logout);
 router.get('/profile', requireAuth, profile);
 
 export default router; 
+//añadir verify

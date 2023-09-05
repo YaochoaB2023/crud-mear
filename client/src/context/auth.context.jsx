@@ -5,7 +5,6 @@ import Cookies from 'js-cookie'
 
 export const AuthContext = createContext()
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () =>
 {
     const context = useContext( AuthContext )
@@ -15,7 +14,6 @@ export const useAuth = () =>
     return context
 }
 
-// eslint-disable-next-line react/prop-types
 export const AuthProvider = ( { children } ) =>
 {
     const [ user, setUser ] = useState( null )
@@ -74,26 +72,24 @@ export const AuthProvider = ( { children } ) =>
         {
             const cookies = Cookies.get()
 
-            if ( !cookies.token )
-            {
+            if ( !cookies.token ){
                 setIsAuthenticathed( false )
+                setLoading(false);
                 return setUser( null )
             }
-            try
-            {
+            try{
                 const res = await verifyTokenRequest( cookies.token )
                 console.log( res )
-                if ( !res.data )
-                {
+                if ( !res.data ){
                     setIsAuthenticathed( false )
                     setLoading( false )
+                    return;
                 }
                 setIsAuthenticathed( true )
                 setUser( res.data )
                 setLoading(false)
 
-            } catch ( error )
-            {
+            } catch ( error ){
                 setIsAuthenticathed( false )
                 setUser( null )
                 setLoading(false)
