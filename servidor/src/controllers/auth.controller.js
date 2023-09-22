@@ -1,6 +1,8 @@
 import User from '../models/user.models.js';
 import bcrypt from 'bcryptjs';
 import { createTokenAcces } from '../libs/jwt.js';
+import jwt from "jsonwebtoken"
+import { TOKEN_SECRET } from '../config.js';
 
 export const register = async (req, res) => {
     // desestructurar el body que se envia
